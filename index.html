@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spider-Verse Screen Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ --red:#b80d12; --red-dark:#7f090c; --ink:#111; --muted:#666; --card:#fff; --radius:18px; }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{ margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif; color:var(--ink); background:#fafafa; line-height:1.5; }
+
+    /* ----- HERO (no data-URI; uses inline SVG element) ----- */
+    .hero{
+      position:relative; isolation:isolate; color:#fff; overflow:hidden;
+      min-height:46vh; display:grid; place-items:center; text-align:center;
+      padding:64px 24px; background:var(--red);
+    }
+    .hero .grain{
+      position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(1000px 600px at 20% 15%, rgba(255,255,255,.12), transparent 60%),
+        radial-gradient(800px 500px at 80% 85%, rgba(0,0,0,.18), transparent 60%);
+      mix-blend-mode:overlay;
+    }
+    .web-overlay{
+      position:absolute; inset:-2px; width:100%; height:100%; pointer-events:none;
+      filter:drop-shadow(0 6px 12px rgba(0,0,0,.35)); opacity:.35;
+    }
+    .hero h1{ font-size: clamp(2rem, 4vw + 1rem, 3.25rem); margin:0 0 12px; letter-spacing:.4px; text-shadow:0 2px 0 var(--red-dark), 0 12px 28px rgba(0,0,0,.45); font-weight:800; }
+    .hero p{ margin:0 0 22px; font-weight:600; opacity:.95; }
+
+    .searchbar{ display:flex; gap:10px; width:min(760px, 92vw); margin-inline:auto; }
+    .searchbar input,.searchbar select,.searchbar button{ font:inherit; padding:12px 14px; border-radius:12px; border:0; }
+    .searchbar input,.searchbar select{ flex:1; min-width:0; background:rgba(255,255,255,.9); box-shadow:0 0 0 2px rgba(255,255,255,.4) inset; outline:none; }
+    .searchbar button{ background:#fff; color:#111; font-weight:700; cursor:pointer; }
+
+    /* ---- Rest of page (unchanged) ---- */
+    .wrap{max-width:1100px; margin:-36px auto 64px; padding:0 20px}
+    .pillbar{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 18px;}
+    .pill{background:#fff; color:#333; border-radius:999px; padding:8px 12px; font-size:.9rem; box-shadow:0 1px 0 rgba(0,0,0,.06), 0 10px 20px rgba(0,0,0,.04); border:1px solid #eee; cursor:pointer;}
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));}
+    .card{background:var(--card); border:1px solid #eee; border-radius:var(--radius); padding:16px; box-shadow:0 1px 0 rgba(0,0,0,.06), 0 14px 28px rgba(0,0,0,.06);}
+    .eyebrow{font-size:.78rem; color:var(--muted); letter-spacing:.3px; text-transform:uppercase}
+    .title{font-size:1.05rem; font-weight:700; margin:.35rem 0 .15rem}
+    .meta{font-size:.86rem; color:#444}
+    .muted{color:var(--muted); font-size:.9rem}
+    .footer{text-align:center; color:#777; padding:46px 16px 64px;}
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-label="Hero">
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Inline SVG web pattern (no escaping issues) -->
+    <svg class="web-overlay" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+      <g fill="none" stroke="white" stroke-opacity=".65" stroke-width="3" stroke-linecap="round">
+        <path d="M600 0v800M0 400h1200"/>
+        <path d="M200 0c80 120 160 240 400 400C840 560 920 680 1000 800"/>
+        <path d="M1000 0C920 120 840 240 600 400C360 560 280 680 200 800"/>
+        <circle cx="600" cy="400" r="110"/><circle cx="600" cy="400" r="220"/>
+        <circle cx="600" cy="400" r="330"/><circle cx="600" cy="400" r="440"/>
+        <circle cx="600" cy="400" r="550"/>
+      </g>
+    </svg>
+
+    <div>
+      <h1>Spider-Verse Screen Guide</h1>
+      <p>Explore every era of Spider-Man on screen — films &amp; TV.</p>
+      <form class="searchbar" id="searchForm" role="search" aria-label="Search titles">
+        <input id="q" name="q" placeholder="Search title, year, people, universe…" autocomplete="off" />
+        <select id="type" name="type" aria-label="Filter by type">
+          <option value="all">All Types</option>
+          <option value="film">Films</option>
+          <option value="tv">TV Series</option>
+        </select>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="wrap" id="app">
+    <nav class="pillbar" aria-label="Quick filters">
+      <button class="pill" data-era="1960s">1960s</button>
+      <button class="pill" data-era="1970s">1970s</button>
+      <button class="pill" data-era="1990s">1990s</button>
+      <button class="pill" data-era="2000s">2000s</button>
+      <button class="pill" data-era="2010s">2010s</button>
+      <button class="pill" data-era="2020s">2020s</button>
+      <button class="pill" data-era="all">Reset</button>
+    </nav>
+
+    <section class="grid" id="grid" aria-live="polite" aria-busy="false"></section>
+    <p class="footer muted">Educational fan project. Data sources to be added by students.</p>
+  </main>
+
+  <script>
+    const DATA = [
+      { id:"spider-man-1967", title:"Spider-Man (Animated Series)", type:"tv", years:"1967–1970", format:"Animation", universe:"TV", people:["Paul Soles"], era:"1960s", summary:"The original animated series and iconic theme." },
+      { id:"amazing-spider-man-tv-1977", title:"The Amazing Spider-Man (TV)", type:"tv", years:"1977–1979", format:"Live-action", universe:"TV", people:["Nicholas Hammond"], era:"1970s", summary:"CBS live-action series." },
+      { id:"spider-man-2002", title:"Spider-Man", type:"film", years:"2002", format:"Live-action", universe:"Sony/Raimi", people:["Tobey Maguire","Kirsten Dunst","Willem Dafoe"], era:"2000s", summary:"Origin story; Green Goblin." },
+      { id:"spider-man-2-2004", title:"Spider-Man 2", type:"film", years:"2004", format:"Live-action", universe:"Sony/Raimi", people:["Tobey Maguire","Alfred Molina"], era:"2000s", summary:"Doc Ock and the responsibility struggle." },
+      { id:"amazing-spider-man-2012", title:"The Amazing Spider-Man", type:"film", years:"2012", format:"Live-action", universe:"Sony/Webb", people:["Andrew Garfield","Emma Stone"], era:"2010s", summary:"Reboot; the Lizard." },
+      { id:"homecoming-2017", title:"Spider-Man: Homecoming", type:"film", years:"2017", format:"Live-action", universe:"MCU", people:["Tom Holland","Michael Keaton"], era:"2010s", summary:"Holland’s first solo MCU film." },
+      { id:"spider-verse-2018", title:"Spider-Man: Into the Spider-Verse", type:"film", years:"2018", format:"Animation", universe:"Spider-Verse", people:["Shameik Moore","Hailee Steinfeld"], era:"2010s", summary:"Miles Morales meets Spider-People." },
+      { id:"across-2023", title:"Spider-Man: Across the Spider-Verse", type:"film", years:"2023", format:"Animation", universe:"Spider-Verse", people:["Shameik Moore","Hailee Steinfeld"], era:"2020s", summary:"Spider Society and canon events." }
+    ];
+
+    const $grid = document.getElementById('grid');
+    const $form = document.getElementById('searchForm');
+    const $q = document.getElementById('q');
+    const $type = document.getElementById('type');
+
+    function render(list){
+      $grid.setAttribute('aria-busy', 'true');
+      $grid.innerHTML = list.map(e => `
+        <article class="card" tabindex="0">
+          <div class="eyebrow">${e.type.toUpperCase()} • ${e.years} • ${e.format}</div>
+          <h3 class="title">${e.title}</h3>
+          <p class="meta"><strong>Universe:</strong> ${e.universe}</p>
+          <p class="muted">${e.summary}</p>
+          <p class="muted"><strong>Key people:</strong> ${e.people.join(', ')}</p>
+        </article>
+      `).join('');
+      $grid.setAttribute('aria-busy', 'false');
+    }
+
+    function filter(){
+      const needle = $q.value.trim().toLowerCase();
+      const t = $type.value;
+      const era = window.__ERA || 'all';
+
+      const list = DATA.filter(e => {
+        const matchesType = t === 'all' ? true : e.type === t;
+        const text = (e.title + ' ' + e.summary + ' ' + e.universe + ' ' + e.years + ' ' + e.people.join(' ')).toLowerCase();
+        const matchesQ = needle ? text.includes(needle) : true;
+        const matchesEra = era === 'all' ? true : e.era === era;
+        return matchesType && matchesQ && matchesEra;
+      });
+
+      render(list);
+    }
+
+    $form.addEventListener('submit', (e) => { e.preventDefault(); filter(); });
+    document.querySelectorAll('.pill').forEach(btn => {
+      btn.addEventListener('click', () => { window.__ERA = btn.dataset.era; filter(); });
+    });
+
+    render(DATA);
+  </script>
+</body>
+</html>
