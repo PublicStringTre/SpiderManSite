@@ -98,15 +98,32 @@
 
   <script>
     const DATA = [
-      { id:"spider-man-1967", title:"Spider-Man (Animated Series)", type:"tv", years:"1967–1970", format:"Animation", universe:"TV", people:["Paul Soles"], era:"1960s", summary:"The original animated series and iconic theme." },
-      { id:"amazing-spider-man-tv-1977", title:"The Amazing Spider-Man (TV)", type:"tv", years:"1977–1979", format:"Live-action", universe:"TV", people:["Nicholas Hammond"], era:"1970s", summary:"CBS live-action series." },
-      { id:"spider-man-2002", title:"Spider-Man", type:"film", years:"2002", format:"Live-action", universe:"Sony/Raimi", people:["Tobey Maguire","Kirsten Dunst","Willem Dafoe"], era:"2000s", summary:"Origin story; Green Goblin." },
-      { id:"spider-man-2-2004", title:"Spider-Man 2", type:"film", years:"2004", format:"Live-action", universe:"Sony/Raimi", people:["Tobey Maguire","Alfred Molina"], era:"2000s", summary:"Doc Ock and the responsibility struggle." },
-      { id:"amazing-spider-man-2012", title:"The Amazing Spider-Man", type:"film", years:"2012", format:"Live-action", universe:"Sony/Webb", people:["Andrew Garfield","Emma Stone"], era:"2010s", summary:"Reboot; the Lizard." },
-      { id:"homecoming-2017", title:"Spider-Man: Homecoming", type:"film", years:"2017", format:"Live-action", universe:"MCU", people:["Tom Holland","Michael Keaton"], era:"2010s", summary:"Holland’s first solo MCU film." },
-      { id:"spider-verse-2018", title:"Spider-Man: Into the Spider-Verse", type:"film", years:"2018", format:"Animation", universe:"Spider-Verse", people:["Shameik Moore","Hailee Steinfeld"], era:"2010s", summary:"Miles Morales meets Spider-People." },
-      { id:"across-2023", title:"Spider-Man: Across the Spider-Verse", type:"film", years:"2023", format:"Animation", universe:"Spider-Verse", people:["Shameik Moore","Hailee Steinfeld"], era:"2020s", summary:"Spider Society and canon events." }
-    ];
+  // 🕸️ TV Series (Shows first)
+  { id:"spider-man-1967", title:"Spider-Man (Animated Series)", type:"tv", years:"1967–1970", format:"Animation", universe:"TV", people:["Paul Soles"], era:"1960s", summary:"The original animated series and iconic theme." },
+  { id:"amazing-spider-man-tv-1977", title:"The Amazing Spider-Man (TV)", type:"tv", years:"1977–1979", format:"Live-action", universe:"TV", people:["Nicholas Hammond"], era:"1970s", summary:"CBS live-action series." },
+  { id:"spider-woman-1979", title:"Spider-Woman", type:"tv", years:"1979–1980", format:"Animation", universe:"TV", people:["Joan Van Ark"], era:"1970s", summary:"Jessica Drew fights crime as Spider-Woman." },
+  { id:"amazing-friends-1981", title:"Spider-Man and His Amazing Friends", type:"tv", years:"1981–1983", format:"Animation", universe:"TV", people:["Dan Gilvezan"], era:"1980s", summary:"Spider-Man teams up with Iceman and Firestar." },
+  { id:"spider-man-unlimited-1999", title:"Spider-Man Unlimited", type:"tv", years:"1999–2001", format:"Animation", universe:"TV", people:["Rino Romano"], era:"1990s", summary:"Spider-Man on Counter-Earth battling the High Evolutionary." },
+  { id:"spectacular-2008", title:"The Spectacular Spider-Man", type:"tv", years:"2008–2009", format:"Animation", universe:"TV", people:["Josh Keaton"], era:"2000s", summary:"Critically acclaimed animated series focused on Peter's high school years." },
+  { id:"ultimate-2012", title:"Ultimate Spider-Man", type:"tv", years:"2012–2017", format:"Animation", universe:"TV", people:["Drake Bell"], era:"2010s", summary:"A comedic and action-packed take on Spider-Man’s adventures." },
+  { id:"spider-man-2017", title:"Spider-Man (2017)", type:"tv", years:"2017–2020", format:"Animation", universe:"TV", people:["Robbie Daymond"], era:"2010s", summary:"Disney XD reboot of the animated Spider-Man saga." },
+  { id:"friendly-neighborhood-2025", title:"Your Friendly Neighborhood Spider-Man", type:"tv", years:"2025–", format:"Animation", universe:"MCU", people:["Hudson Thames"], era:"2020s", summary:"Upcoming MCU animated prequel to Homecoming." },
+
+  // 🎬 Films
+  { id:"spider-man-2002", title:"Spider-Man", type:"film", years:"2002", format:"Live-action", universe:"Sony/Raimi", people:["Tobey Maguire","Kirsten Dunst","Willem Dafoe"], era:"2000s", summary:"Origin story; Green Goblin." },
+  { id:"spider-man-2-2004", title:"Spider-Man 2", type:"film", years:"2004", format:"Live-action", universe:"Sony/Raimi", people:["Tobey Maguire","Alfred Molina"], era:"2000s", summary:"Doc Ock and the responsibility struggle." },
+  { id:"spider-man-21-2007", title:"Spider-Man 2.1", type:"film", years:"2007", format:"Live-action", universe:"Sony/Raimi", people:["Tobey Maguire","Alfred Molina"], era:"2000s", summary:"Extended cut of Spider-Man 2 with added scenes." },
+  { id:"spider-man-3-2007", title:"Spider-Man 3", type:"film", years:"2007", format:"Live-action", universe:"Sony/Raimi", people:["Tobey Maguire","Thomas Haden Church","Topher Grace"], era:"2000s", summary:"Venom, Sandman, and Peter’s dark side." },
+  { id:"amazing-spider-man-2012", title:"The Amazing Spider-Man", type:"film", years:"2012", format:"Live-action", universe:"Sony/Webb", people:["Andrew Garfield","Emma Stone"], era:"2010s", summary:"Reboot; the Lizard." },
+  { id:"amazing-spider-man-2-2014", title:"The Amazing Spider-Man 2", type:"film", years:"2014", format:"Live-action", universe:"Sony/Webb", people:["Andrew Garfield","Emma Stone","Jamie Foxx"], era:"2010s", summary:"Electro and Green Goblin face Spider-Man." },
+  { id:"civil-war-2016", title:"Captain America: Civil War", type:"film", years:"2016", format:"Live-action", universe:"MCU", people:["Tom Holland","Chris Evans","Robert Downey Jr."], era:"2010s", summary:"Spider-Man joins the MCU during the hero conflict." },
+  { id:"homecoming-2017", title:"Spider-Man: Homecoming", type:"film", years:"2017", format:"Live-action", universe:"MCU", people:["Tom Holland","Michael Keaton"], era:"2010s", summary:"Holland’s first solo MCU film." },
+  { id:"far-from-home-2019", title:"Spider-Man: Far From Home", type:"film", years:"2019", format:"Live-action", universe:"MCU", people:["Tom Holland","Jake Gyllenhaal"], era:"2010s", summary:"Peter faces Mysterio after Endgame." },
+  { id:"no-way-home-2022", title:"Spider-Man: No Way Home", type:"film", years:"2022", format:"Live-action", universe:"MCU", people:["Tom Holland","Tobey Maguire","Andrew Garfield"], era:"2020s", summary:"Multiverse team-up of three Spider-Men." },
+  { id:"spider-verse-2018", title:"Spider-Man: Into the Spider-Verse", type:"film", years:"2018", format:"Animation", universe:"Spider-Verse", people:["Shameik Moore","Hailee Steinfeld"], era:"2010s", summary:"Miles Morales meets Spider-People." },
+  { id:"across-2023", title:"Spider-Man: Across the Spider-Verse", type:"film", years:"2023", format:"Animation", universe:"Spider-Verse", people:["Shameik Moore","Hailee Steinfeld"], era:"2020s", summary:"Spider Society and canon events." }
+];
+
 
     const $grid = document.getElementById('grid');
     const $form = document.getElementById('searchForm');
