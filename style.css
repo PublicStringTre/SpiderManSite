@@ -1,0 +1,10 @@
+/* Card image at top, uniform size */
+.card .thumb{
+  width:100%;
+  aspect-ratio:16/9;           /* consistent shape */
+  object-fit:cover;            /* clean crop */
+  border-radius:12px;
+  display:block;
+  background:#eee;             /* nice placeholder bg */
+  margin-bottom:12px;
+}
